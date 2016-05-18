@@ -31,9 +31,12 @@
 // Range should use constant space, even during the each() method, * i.e. you 
 // should not use an array as backing storage.
 var Range = function(start, end, step) {
-  this.start = start;
-  this.end = end === undefined ? start : end;
-  this.step = step || (start < end ? 1 : -1);
+  if(start === undefined)
+  else {
+    this.start = start;
+    this.end = end === undefined ? start : end;
+    this.step = step || (start =< end ? 1 : -1);
+  }
 };
 
 Range.prototype.size = function () {
@@ -43,6 +46,12 @@ Range.prototype.size = function () {
 Range.prototype.each = function (callback) {
   for(var i = this.start; this.start < this.end ? i <= this.end : i >= this.end; i += this.step)
     callback(i);
+  // or
+  // var val = this.start
+  // for(var i = 0; i < this.size(); i++) {
+  //   callback(val);
+  //   val += this.step;
+  // }
 };
 
 Range.prototype.includes = function (val) {
