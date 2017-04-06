@@ -6,9 +6,9 @@
 // Parameters:
 // string (required) - a string of characters.
 
-const anagramizer = (anagram, chars, anagrams = {}) => 
+const anagramizer = (chars, anagram = '', anagrams = {}) => 
   chars.length === 0 
   ? (anagrams[anagram] = true, anagrams) 
-  : chars.split('').reduce((anagrams, char, idx) => anagramizer(anagram + char, chars.slice(0, idx) + chars.slice(idx + 1), anagrams), anagrams)
+  : chars.split('').reduce((anagrams, char, idx) => anagramizer(chars.slice(0, idx) + chars.slice(idx + 1), anagram + char, anagrams), anagrams)
 
-const allAnagrams = (string) => Object.keys(anagramizer('', string))
+const allAnagrams = (string) => Object.keys(anagramizer(string))
