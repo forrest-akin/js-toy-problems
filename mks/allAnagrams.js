@@ -7,8 +7,9 @@
 // string (required) - a string of characters.
 
 const allAnagrams = (string) => {
-  let anagrams = {};
-  const anagramizer = (anagram, chars) => chars.length === 0 ? anagrams[anagram] = true : chars.split('').forEach((char, idx) => anagramizer(anagram + char, chars.slice(0, idx) + chars.slice(idx + 1)));
-  anagramizer('', string);
-  return Object.keys(anagrams);
+  const anagramizer = (anagram, chars, anagrams) => 
+    chars.length === 0 
+    ? (anagrams[anagram] = true, anagrams) 
+    : chars.split('').reduce((anagrams, char, idx) => anagramizer(anagram + char, chars.slice(0, idx) + chars.slice(idx + 1), anagrams), anagrams)
+  return Object.keys(anagramizer('', string, {}))
 }
